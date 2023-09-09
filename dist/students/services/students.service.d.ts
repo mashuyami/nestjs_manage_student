@@ -5,6 +5,7 @@ export declare class StudentsService {
     private StudentRepository;
     constructor(StudentRepository: Repository<Student>);
     findStudents(): Promise<Student[]>;
+    searchStudents(query: string): Promise<Student[]>;
     createStudent(StudentDetails: CreateStudentParams): Promise<Student>;
     updateStudent(id: number, updateStudentDetails: UpdateStudentParams): Promise<import("typeorm").UpdateResult>;
     deleteStudent(id: number): Promise<import("typeorm").DeleteResult>;

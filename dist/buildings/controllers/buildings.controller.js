@@ -27,6 +27,9 @@ let BuildingsController = class BuildingsController {
     createBuilding(createBuidingDto) {
         return this.buildingservice.createbuilding(createBuidingDto);
     }
+    searchBuildings(query) {
+        return this.buildingservice.searchBuildings(query);
+    }
     async updateBuidingById(id, updateBuidingDto) {
         await this.buildingservice.updatebuilding(id, updateBuidingDto);
     }
@@ -48,6 +51,13 @@ __decorate([
     __metadata("design:paramtypes", [CreateBuilding_dto_1.CreateBuildingDto]),
     __metadata("design:returntype", void 0)
 ], BuildingsController.prototype, "createBuilding", null);
+__decorate([
+    (0, common_1.Get)('search'),
+    __param(0, (0, common_1.Query)('query')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], BuildingsController.prototype, "searchBuildings", null);
 __decorate([
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),

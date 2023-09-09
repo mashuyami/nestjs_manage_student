@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { Building } from './Building';
 import { Bed } from './Bed';
+import { Student } from './Student';
 
 @Entity({ name: 'rooms' })
 export class Room {
@@ -27,8 +28,8 @@ export class Room {
   @Column()
   trangThai: number;
 
-  @ManyToOne(() => Building, (building) => building.rooms)
+  @ManyToOne(() => Building, (building) => building.room)
   building: Building;
   @OneToMany(() => Bed, (bed) => bed.room)
-  beds: Bed[];
+  bed: Bed[];
 }

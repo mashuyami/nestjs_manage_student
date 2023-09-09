@@ -6,6 +6,7 @@ export declare class RoomsService {
     constructor(roomRepository: Repository<Room>);
     findRooms(): Promise<Room[]>;
     createRoom(RoomDetails: CreateRoomParams): Promise<Room>;
+    searchRooms(query: string): Promise<Room[]>;
     updateRoom(id: number, updateRoomDetails: UpdateRoomParams): Promise<import("typeorm").UpdateResult>;
     deleteRoom(id: number): Promise<import("typeorm").DeleteResult>;
 }

@@ -5,6 +5,7 @@ export declare class BedsService {
     private bedRepository;
     constructor(bedRepository: Repository<Bed>);
     findBeds(): Promise<Bed[]>;
+    searchBeds(query: string): Promise<Bed[]>;
     createBed(BedDetails: CreateBedParams): Promise<Bed>;
     updateBed(id: number, updateBedDetails: UpdateBedParams): Promise<import("typeorm").UpdateResult>;
     deleteBed(id: number): Promise<import("typeorm").DeleteResult>;

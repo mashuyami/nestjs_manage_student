@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToOne } from 'typeorm';
 import { Bed } from './Bed';
+import { Room } from './Room';
 
 @Entity({ name: 'students' })
 export class Student {
@@ -43,6 +44,7 @@ export class Student {
   trangThai: number;
   @Column()
     createdAt: Date;
-  @OneToOne(() => Bed, (bed) => bed.student)
-  bed: Bed;
+    @OneToOne(() => Bed)
+    @JoinColumn()
+    bed: Bed;
 }

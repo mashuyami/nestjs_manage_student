@@ -24,6 +24,9 @@ let RoomsController = class RoomsController {
     getRooms() {
         return this.roomservice.findRooms();
     }
+    searchRooms(query) {
+        return this.roomservice.searchRooms(query);
+    }
     createRoom(createRoomDto) {
         return this.roomservice.createRoom(createRoomDto);
     }
@@ -41,6 +44,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], RoomsController.prototype, "getRooms", null);
+__decorate([
+    (0, common_1.Get)('search'),
+    __param(0, (0, common_1.Query)('query')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], RoomsController.prototype, "searchRooms", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),

@@ -15,5 +15,5 @@ export class Building {
   @Column()
   trangThai: number;
   @OneToMany(() => Room, (room) => room.building)
-  rooms: Room[];
+  room: Room[];
 }

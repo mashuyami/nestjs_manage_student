@@ -11,9 +11,16 @@ export class BedsService {
   ) {}
 
   findBeds() {
-    return this.bedRepository.find();
+    return this.bedRepository.find({ relations: ['room','student','room.building'] });
   }
+  searchBeds(query: string) {
+    return this.bedRepository
+      .createQueryBuilder('bed')
+      .where('bed.viTriGiuong LIKE :query', { query: `%${query}%` })
+      .orWhere('bed.trangThai LIKE :query', { query: `%${query}%` })
+      .getMany();
 
+  }
   createBed(BedDetails: CreateBedParams) {
     const newBed = this.bedRepository.create({
       ...BedDetails

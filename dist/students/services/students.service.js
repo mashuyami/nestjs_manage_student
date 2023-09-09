@@ -22,7 +22,14 @@ let StudentsService = class StudentsService {
         this.StudentRepository = StudentRepository;
     }
     findStudents() {
-        return this.StudentRepository.find();
+        return this.StudentRepository.find({ relations: ['bed', 'bed.room', 'bed.room.building'] });
+    }
+    searchStudents(query) {
+        return this.StudentRepository
+            .createQueryBuilder('student')
+            .where('student.hoTen LIKE :query', { query: `%${query}%` })
+            .orWhere('student.email LIKE :query', { query: `%${query}%` })
+            .getMany();
     }
     createStudent(StudentDetails) {
         const newStudent = this.StudentRepository.create({
@@ -43,4 +50,4 @@ exports.StudentsService = StudentsService = __decorate([
     __param(0, (0, typeorm_1.InjectRepository)(Student_1.Student)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
 ], StudentsService);
-//# sourceMappingURL=students.service.js.map
+//# sourceMappingURL=Students.service.js.map

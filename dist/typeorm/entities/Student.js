@@ -72,7 +72,8 @@ __decorate([
     __metadata("design:type", Date)
 ], Student.prototype, "createdAt", void 0);
 __decorate([
-    (0, typeorm_1.OneToOne)(() => Bed_1.Bed, (bed) => bed.student),
+    (0, typeorm_1.OneToOne)(() => Bed_1.Bed),
+    (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", Bed_1.Bed)
 ], Student.prototype, "bed", void 0);
 exports.Student = Student = __decorate([

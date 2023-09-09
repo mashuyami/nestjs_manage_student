@@ -11,9 +11,16 @@ export class BuildingsService {
   ) {}
 
   findBuildings() {
-    return this.buildingRepository.find();
+    return this.buildingRepository.find({ relations: ['room','room.bed','room.bed.student'] });
   }
+  searchBuildings(query: string) {
+    return this.buildingRepository
+      .createQueryBuilder('building')
+      .where('building.tenToaNha LIKE :query', { query: `%${query}%` })
+      .orWhere('building.soTang LIKE :query', { query: `%${query}%` })
+      .getMany();
 
+  }
   createbuilding(buildingDetails: CreateBuildingParams) {
     const newBuilding = this.buildingRepository.create({
       ...buildingDetails

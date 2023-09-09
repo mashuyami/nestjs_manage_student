@@ -6,6 +6,7 @@ export declare class BedsController {
     constructor(Bedservice: BedsService);
     getBeds(): Promise<import("../../typeorm/entities/Bed").Bed[]>;
     createBed(createBedDto: CreateBedDto): Promise<import("../../typeorm/entities/Bed").Bed>;
+    searchBeds(query: string): Promise<import("../../typeorm/entities/Bed").Bed[]>;
     updateBedById(id: number, updateBedDto: UpdateBedDto): Promise<void>;
     deleteBedById(id: number): Promise<void>;
 }

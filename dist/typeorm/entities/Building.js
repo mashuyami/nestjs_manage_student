@@ -34,7 +34,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.OneToMany)(() => Room_1.Room, (room) => room.building),
     __metadata("design:type", Array)
-], Building.prototype, "rooms", void 0);
+], Building.prototype, "room", void 0);
 exports.Building = Building = __decorate([
     (0, typeorm_1.Entity)({ name: 'buildings' })
 ], Building);

@@ -22,7 +22,14 @@ let BedsService = class BedsService {
         this.bedRepository = bedRepository;
     }
     findBeds() {
-        return this.bedRepository.find();
+        return this.bedRepository.find({ relations: ['room', 'student', 'room.building'] });
+    }
+    searchBeds(query) {
+        return this.bedRepository
+            .createQueryBuilder('bed')
+            .where('bed.viTriGiuong LIKE :query', { query: `%${query}%` })
+            .orWhere('bed.trangThai LIKE :query', { query: `%${query}%` })
+            .getMany();
     }
     createBed(BedDetails) {
         const newBed = this.bedRepository.create({

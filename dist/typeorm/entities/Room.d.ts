@@ -10,5 +10,5 @@ export declare class Room {
     donGia: number;
     trangThai: number;
     building: Building;
-    beds: Bed[];
+    bed: Bed[];
 }

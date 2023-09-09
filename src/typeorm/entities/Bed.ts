@@ -11,9 +11,10 @@ export class Bed {
 
   @Column()
   trangThai: number;
-  @OneToOne(() => Student, (student) => student.bed)
-  student: Student;
 
-  @ManyToOne(() => Room, (room) => room.beds)
+  @OneToOne(() => Student)
+  @JoinColumn()
+  student: Student;
+  @ManyToOne(() => Room, (room) => room.bed)
   room: Room;
 }

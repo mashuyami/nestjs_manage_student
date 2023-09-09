@@ -7,6 +7,7 @@ import {
     ParseIntPipe,
     Post,
     Put,
+    Query,
   } from '@nestjs/common';
   import { CreateBuildingDto } from '../dto/CreateBuilding.dto';
   import { UpdateBuildingDto } from '../dto/UpdateBuilding.dto';
@@ -23,7 +24,11 @@ import { BuildingsService } from '../services/buildings.service';
     createBuilding(@Body() createBuidingDto: CreateBuildingDto) {
       return this.buildingservice.createbuilding(createBuidingDto);
     }
-  
+    
+    @Get('search')
+    searchBuildings(@Query('query') query: string) {
+      return this.buildingservice.searchBuildings(query);
+    }
     @Put(':id')
     async updateBuidingById(
       @Param('id', ParseIntPipe) id: number,

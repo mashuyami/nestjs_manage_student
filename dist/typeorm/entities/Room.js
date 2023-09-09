@@ -49,13 +49,13 @@ __decorate([
     __metadata("design:type", Number)
 ], Room.prototype, "trangThai", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => Building_1.Building, (building) => building.rooms),
+    (0, typeorm_1.ManyToOne)(() => Building_1.Building, (building) => building.room),
     __metadata("design:type", Building_1.Building)
 ], Room.prototype, "building", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => Bed_1.Bed, (bed) => bed.room),
     __metadata("design:type", Array)
-], Room.prototype, "beds", void 0);
+], Room.prototype, "bed", void 0);
 exports.Room = Room = __decorate([
     (0, typeorm_1.Entity)({ name: 'rooms' })
 ], Room);

@@ -7,6 +7,7 @@ import {
     ParseIntPipe,
     Post,
     Put,
+    Query,
   } from '@nestjs/common';
   import { CreateRoomDto } from '../dto/CreateRoom.dto';
   import { UpdateRoomDto } from '../dto/UpdateRoom.dto';
@@ -17,6 +18,11 @@ import { RoomsService } from '../services/rooms.service';
     @Get()
     getRooms() {
       return this.roomservice.findRooms();
+    }
+  
+    @Get('search')
+    searchRooms(@Query('query') query: string) {
+      return this.roomservice.searchRooms(query);
     }
   
     @Post()

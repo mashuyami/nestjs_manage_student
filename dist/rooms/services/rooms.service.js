@@ -22,13 +22,20 @@ let RoomsService = class RoomsService {
         this.roomRepository = roomRepository;
     }
     findRooms() {
-        return this.roomRepository.find();
+        return this.roomRepository.find({ relations: ['bed', 'building', 'bed.student'] });
     }
     createRoom(RoomDetails) {
         const newRoom = this.roomRepository.create({
             ...RoomDetails
         });
         return this.roomRepository.save(newRoom);
+    }
+    searchRooms(query) {
+        return this.roomRepository
+            .createQueryBuilder('room')
+            .where('room.tenPhong LIKE :query', { query: `%${query}%` })
+            .orWhere('room.viTriTang LIKE :query', { query: `%${query}%` })
+            .getMany();
     }
     updateRoom(id, updateRoomDetails) {
         return this.roomRepository.update({ id }, { ...updateRoomDetails });

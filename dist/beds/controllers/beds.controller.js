@@ -27,6 +27,9 @@ let BedsController = class BedsController {
     createBed(createBedDto) {
         return this.Bedservice.createBed(createBedDto);
     }
+    searchBeds(query) {
+        return this.Bedservice.searchBeds(query);
+    }
     async updateBedById(id, updateBedDto) {
         await this.Bedservice.updateBed(id, updateBedDto);
     }
@@ -48,6 +51,13 @@ __decorate([
     __metadata("design:paramtypes", [CreateBed_dto_1.CreateBedDto]),
     __metadata("design:returntype", void 0)
 ], BedsController.prototype, "createBed", null);
+__decorate([
+    (0, common_1.Get)('search'),
+    __param(0, (0, common_1.Query)('query')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], BedsController.prototype, "searchBeds", null);
 __decorate([
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),

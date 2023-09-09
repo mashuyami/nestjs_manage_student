@@ -4,5 +4,5 @@ export declare class Building {
     tenToaNha: string;
     soTang: number;
     trangThai: number;
-    rooms: Room[];
+    room: Room[];
 }

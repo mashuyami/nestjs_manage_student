@@ -29,11 +29,12 @@ __decorate([
     __metadata("design:type", Number)
 ], Bed.prototype, "trangThai", void 0);
 __decorate([
-    (0, typeorm_1.OneToOne)(() => Student_1.Student, (student) => student.bed),
+    (0, typeorm_1.OneToOne)(() => Student_1.Student),
+    (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", Student_1.Student)
 ], Bed.prototype, "student", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => Room_1.Room, (room) => room.beds),
+    (0, typeorm_1.ManyToOne)(() => Room_1.Room, (room) => room.bed),
     __metadata("design:type", Room_1.Room)
 ], Bed.prototype, "room", void 0);
 exports.Bed = Bed = __decorate([
