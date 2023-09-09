@@ -33,7 +33,16 @@ export class StudentsController {
     return this.Studentservice.createStudent(createStudentDto);
   }
 
-  
+  //loc sinh vien theo id toa nha
+  @Get('filterByBuilding')
+  filterStudentsByBuilding(@Query('buildingId') buildingId: number) {
+    return this.Studentservice.filterStudentsByBuilding(buildingId);
+  }
+ //loc sinh vien theo id room
+  @Get('filterByRoom')
+  filterStudentsByRoom(@Query('roomId') roomId: number) {
+    return this.Studentservice.filterStudentsByRoom(roomId);
+  }
   @Put(':id')
   async updateStudentById(
     @Param('id', ParseIntPipe) id: number,

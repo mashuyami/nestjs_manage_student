@@ -2,10 +2,12 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindManyOptions, Repository } from 'typeorm';
 import { Student } from 'src/typeorm/entities/Student';
-import { CreateBedParams, CreateRoomParams, CreateStudentParams,UpdateStudentParams } from 'src/utils/types';
-import { Bed } from 'src/typeorm/entities/Bed';
-import { Room } from 'src/typeorm/entities/Room';
-import { Building } from 'src/typeorm/entities/Building';
+import {
+  CreateBedParams,
+  CreateRoomParams,
+  CreateStudentParams,
+  UpdateStudentParams,
+} from 'src/utils/types';
 @Injectable()
 export class StudentsService {
   constructor(
@@ -13,36 +15,58 @@ export class StudentsService {
   ) {}
 
   findStudents() {
-    return this.StudentRepository.find({ relations: ['bed','bed.room','bed.room.building'] });
+    return this.StudentRepository.find({
+      relations: ['bed', 'bed.room', 'bed.room.building'],
+    });
   }
-
-
-
-
-  // Method tìm kiếm sinh viên theo tên hoặc một trường khác
+  filterStudentsByBuilding(buildingId: number) {
+    // Lọc sinh viên theo tòa nhà
+    // Điều kiện lọc: Sinh viên đang ở trong tòa nhà có ID là buildingId
+    return this.StudentRepository.find({
+      where: {
+        bed: {
+          room: {
+            building: {
+              id: buildingId,
+            },
+          },
+        },
+      },
+      relations: ['bed', 'bed.room', 'bed.room.building'],
+    });
+  }
+  // Lọc sinh viên theo phòng
+  // Điều kiện lọc: Sinh viên đang ở trong phòng có ID là roomId
+  filterStudentsByRoom(roomId: number) {
+    return this.StudentRepository.find({
+      where: {
+        bed: {
+          room: {
+            id: roomId,
+          },
+        },
+      },
+      relations: ['bed', 'bed.room', 'bed.room.building'],
+    });
+  }
   searchStudents(query: string) {
-    return this.StudentRepository
-      .createQueryBuilder('student')
+    return this.StudentRepository.createQueryBuilder('student')
       .where('student.hoTen LIKE :query', { query: `%${query}%` })
       .orWhere('student.email LIKE :query', { query: `%${query}%` })
       .getMany();
   }
-
-
   createStudent(StudentDetails: CreateStudentParams) {
     const newStudent = this.StudentRepository.create({
-      ...StudentDetails
+      ...StudentDetails,
     });
     return this.StudentRepository.save(newStudent);
   }
-  
+
   updateStudent(id: number, updateStudentDetails: UpdateStudentParams) {
-    return this.StudentRepository.update({id }, { ...updateStudentDetails });
+    return this.StudentRepository.update({ id }, { ...updateStudentDetails });
   }
 
   deleteStudent(id: number) {
-    return this.StudentRepository.delete({id });
+    return this.StudentRepository.delete({ id });
   }
-
-  
 }
